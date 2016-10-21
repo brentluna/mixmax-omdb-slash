@@ -2,19 +2,29 @@ const sync = require('synchronize');
 const request = require('request');
 
 function resolver(req, res) {
-	const term = req.query.text.trim();
-	console.log(term);
-
-	handleSearchString(term, req, res);
+	let term = req.query.text.trim();
+	console.log('inside' + term);
+	let paramType;
+	if (/^http:\/\/omdbapi\.com\/\S+/.test(term)) {
+		paramType = 'i'
+		term = term.replace(/^http:\/\/omdbapi\.com\/i=/, '');
+	} else {
+		paramType = 't';
+	}
+	console.log(term, paramType);
+	handleSearchInput(paramType, term, req, res);
 
 }
 
 
-function handleSearchString(term, req, res) {
+
+
+
+function handleSearchInput(paramType, term, req, res) {
 	let response;
 	try {
 		response = sync.await(request({
-			url: `http://omdbapi.com/?t=${term}`,
+			url: `http://omdbapi.com/?${paramType}=${term}`,
 			gzip: true,
 			json: true,
 			timeout: 15 * 1000
