@@ -37,9 +37,10 @@ function typeahead(req, res) {
 
 
 	let results = [];
+	console.log(response.body)
 	if (response.body.Response === 'True') {
 		results = [{
-			title:`<h1>${response.body.Title}</h1>`,
+			title:`<h3>${response.body.Title}</h3><img src=${response.body.Poster} />`,
 			poster: `<img src=${response.body.Poster} />`
 		}];
 	}
