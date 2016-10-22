@@ -7,11 +7,15 @@ This is an open source Mixmax Slash Command, that will search www.omdbapi.com, a
 ![screenshot](./screenshot.png)
 
  See <http://developer.mixmax.com/docs/overview-slash-commands> for more information about how to use this example code in Mixmax. 
+
+
 ## Technologies Used 
 - JavaScript 
 - Node Express Server 
 - Synchronize 
 - Request
+
+This was a fun project as it was my first experience using Node Express for a server, as well as the accompanying packages. I've primarily utizlied rails' WEBrick or Puma servers, but have been wanting to learn about Node Express, so enjoyed that.
 
 ## Running locally
 
@@ -55,3 +59,9 @@ If you wish to install the slash command to your current Mixmax slash commands, 
 | Paramater placeholder | [Search]                       |
 | Typeahead API URL     | http://localhost:9145/resolver |
 | Resolver API URL      | http://localhost:9145/resolver |
+
+
+## TODO 
+
+- Update styling
+- Get the tests in the test branch working, merge into master
