@@ -37,7 +37,6 @@ function typeahead(req, res) {
 
 
 	let results = [];
-	console.log(response)
 	if (response.body.Response === 'True') {
 		let data = response.body
 		if (data.Plot.length > 160) {

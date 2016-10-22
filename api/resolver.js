@@ -3,7 +3,6 @@ const request = require('request');
 
 function resolver(req, res) {
 	let term = req.query.text.trim();
-	console.log('inside' + term);
 	let paramType;
 	if (/^http:\/\/omdbapi\.com\/\S+/.test(term)) {
 		paramType = 'i'
@@ -11,7 +10,6 @@ function resolver(req, res) {
 	} else {
 		paramType = 't';
 	}
-	console.log(term, paramType);
 	handleSearchInput(paramType, term, req, res);
 
 }
@@ -72,10 +70,7 @@ const styles = {
 	imgDiv: '"width: 180px;height: 260px; object-fit: contain; margin-right:20px;"',
 	img: '"height: 100%;"',
 	container: '"display:flex; width:360px; background:#eee;"',
-	textContainer: '"margin-right:10px; font-size: 14px; display:flex; flex-direction:column; justify-content: space-between;"'
-
-
-	
+	textContainer: '"margin-right:10px; margin-bottom:10px; font-size: 14px; display:flex; flex-direction:column; justify-content: space-between;"'	
 }
 
 
