@@ -34,18 +34,48 @@ function handleSearchInput(paramType, term, req, res) {
 		return;
 	}
 	let data = response.body
-	const html = `<div>
-									<h1>
-										${data.Title}
-									</h1>
-									<div>
-										<img src=${data.Poster} />
+	if (data.Plot.length > 160) {
+		data.Plot = data.Plot.slice(0, 160) + '...';
+	}
+	const html = `<div style=${styles.container}>
+									<div style=${styles.imgDiv}>
+										<img style=${styles.img} src=${data.Poster} />
 									</div>
+									<div style=${styles.textContainer}>
+										<div>
+											<h4>
+												${data.Title}
+											</h4>
+											<p>
+												${data.Plot}
+											</p>
+										</div>
+										<div>
+											<div>
+												Year Released: ${data.Year}
+											</div>
+											<div>
+												<a href="http://imdb.com/title/${data.imdbID}" target="_blank">
+												IMDB Rating: ${data.imdbRating}
+												</a>
+											</div>
+										</div>
+									</div>	
 								</div>`.replace(/\t|\n/g, '');
 
 	res.json({
 		body: html
 	});
+}
+
+const styles = {
+	imgDiv: '"width: 180px;height: 260px; object-fit: contain; margin-right:20px;"',
+	img: '"height: 100%;"',
+	container: '"display:flex; width:360px; background:#eee;"',
+	textContainer: '"margin-right:10px; font-size: 14px; display:flex; flex-direction:column; justify-content: space-between;"'
+
+
+	
 }
 
 

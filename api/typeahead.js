@@ -39,9 +39,38 @@ function typeahead(req, res) {
 	let results = [];
 	console.log(response)
 	if (response.body.Response === 'True') {
+		let data = response.body
+		if (data.Plot.length > 160) {
+			data.Plot = data.Plot.slice(0, 160) + '...';
+		}
+		const html = `<div style=${styles.container}>
+									<div style=${styles.imgDiv}>
+										<img style=${styles.img} src=${data.Poster} />
+									</div>
+									<div style=${styles.textContainer}>
+										<div>
+											<h4>
+												${data.Title}
+											</h4>
+											<p>
+												${data.Plot}
+											</p>
+										</div>
+										<div>
+											<div>
+												Year Released: ${data.Year}
+											</div>
+											<div>
+												<a href="http://imdb.com/title/${data.imdbID}" target="_blank">
+												IMDB Rating: ${data.imdbRating}
+												</a>
+											</div>
+										</div>
+									</div>	
+								</div>`.replace(/\t|\n/g, '');
 		results = [{
-			title:`<h3>${response.body.Title}</h3><img src=${response.body.Poster} />`,
-			text: `http://omdbapi.com/i=${response.body.imdbID}`
+			title: html,
+			text: `http://omdbapi.com/i=${data.imdbID}`
 		}];
 	}
 
@@ -53,6 +82,13 @@ function typeahead(req, res) {
 	} else {
 		res.json(results);
 	}
+}
+
+const styles = {
+	imgDiv: '"width: 180px;height: 260px; object-fit: contain; margin-right:20px;"',
+	img: '"height: 100%;"',
+	container: '"display:flex; width:360px; background:#eee;"',
+	textContainer: '"margin-right:10px; margin-bottom:10px; font-size: 11px; display:flex; flex-direction:column; justify-content: space-between;"'	
 }
 
 module.exports = typeahead;
