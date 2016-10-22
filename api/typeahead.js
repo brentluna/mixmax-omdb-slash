@@ -4,7 +4,7 @@ const request = require('request');
 
 function typeahead(req, res) {
 	const term = req.query.text.trim();
-
+	console.log(term)
 	if (!term) {
 		res.json([{
 			title: '<i>(enter a search term)</i>',
@@ -35,7 +35,7 @@ function typeahead(req, res) {
 		return;
 	}
 
-
+	console.log(response)
 	let results = [];
 	if (response.body.Response === 'True') {
 		let data = response.body

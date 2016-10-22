@@ -21,3 +21,4 @@ app.get('/typeahead', cors(corsOptions), typeahead);
 app.get('/resolver', cors(corsOptions), resolver);
 
 app.listen(process.env.PORT || 9145);
+
